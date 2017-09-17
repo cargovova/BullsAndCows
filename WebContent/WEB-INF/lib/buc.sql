@@ -1,0 +1,17 @@
+CREATE DATABASE  IF NOT EXISTS `PUBLIC` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `PUBLIC`;
+DROP TABLE IF EXISTS `register`;
+
+CREATE TABLE `register` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `name` char(30) NOT NULL,
+  `pass` char(30) NOT NULL,
+  `repass` char(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
+LOCK TABLES `register` WRITE;
+INSERT INTO `register` VALUES (1,'asd','asd');
+UNLOCK TABLES;
+
