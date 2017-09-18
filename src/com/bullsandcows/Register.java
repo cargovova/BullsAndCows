@@ -20,19 +20,21 @@ public class Register extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		PrintWriter out = response.getWriter();
 		response.setContentType("text/html;charset=UTF-8");
+		
 		String name = request.getParameter("name");
 		String pass = request.getParameter("pass");
 		String confirm_pass = request.getParameter("confirm");
+		
 		try {
-			PrintWriter out = response.getWriter();
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
-			con = DriverManager.getConnection("jdbc:hsqldb:mem:MyDB", "SA", "");
+			con = DriverManager.getConnection("jdbc:hsqldb:mem:testdb", "SA", "");
 			stmt = con.createStatement();
-			stmt.executeUpdate("INSERT INTO register VALUES (name, pass)");
+
 			if (pass.equals(confirm_pass)) {
-				
+				stmt.executeUpdate("INSERT INTO register VALUES (name, pass)");
 				out.println("Sign Up Successful");
 				RequestDispatcher rd = request.getRequestDispatcher("game.jsp");
 				rd.forward(request, response);
