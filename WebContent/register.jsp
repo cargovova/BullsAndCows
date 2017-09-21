@@ -7,11 +7,12 @@
 <title>Registration</title>
 </head>
 <body>
-	<form name="myform" method="post" action="Register">
+	<form name="myform" method="post" action="RegServlet">
+	<input type="hidden" name="pagename" value="register"/>
 <center><h1>Registration page</h1></center>
-<center><input id= "name" style="text-indent:20px;" type="text" name="name" placeholder="Userame"></input><br><br></center>
-<center><input id= "pass" style="text-indent:20px;" type="password" name="pass" placeholder="Password"></input><br><br></center>
-<center><input id= "confirmpass" style="text-indent:20px;" type="password" name="confirm" placeholder="Confirm password"></input><br><br></center>
+<center><input type="text" name="fname" placeholder="Username"></input><br><br></center>
+<center><input type="password" name="password" placeholder="Password"></input><br><br></center>
+<center><input type="password" name="confirmpass" placeholder="Confirm password"></input><br><br></center>
 <center><input id="in"  type="submit" name="submit" value="Sign up"></input><br><br></center> 
 	</form>
 </body>

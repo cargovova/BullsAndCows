@@ -8,9 +8,10 @@
 </head>
 <body>
 	<center><h2>Bulls and Cows</h2></center>
-	<form method="post" action="Login">
-	<center><input type="text" name="name" placeholder="Username"></input><br><br></center>
-	<center><input type="password" name = "pass" placeholder="Password"></input><br></center><br>
+	<form method="post" action="RegServlet">
+	<center><input type="text" name="LogUser" placeholder="Username"></input><br><br></center>
+	<center><input type="password" name = "LogPass" placeholder="Password"></input><br></center><br>
+	        <input type="hidden" name="pagename" value="login"/>
 	<center><input id="in" type= "submit" name="submit" value="LOGIN"></input><br><br></center>
 	</form>
     <center><p>Not registered? <a href="register.jsp">NEW USER</a></p></center>

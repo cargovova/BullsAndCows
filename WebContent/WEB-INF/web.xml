@@ -4,30 +4,9 @@
 		<welcome-file-list>
 		<welcome-file>home.jsp</welcome-file>
 		<welcome-file>register.jsp</welcome-file>
-		<welcome-file>login.jsp</welcome-file>
-		<welcome-file>contact.jsp</welcome-file>
+		<welcome-file>successful.jsp</welcome-file>
+		<welcome-file>game.jsp</welcome-file>
 	</welcome-file-list>
-	<servlet>
-		<description>
-		</description>
-		<display-name>Login</display-name>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>com.bullsandcows.Login</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>LoginDAO</display-name>
-		<servlet-name>LoginDAO</servlet-name>
-		<servlet-class>com.bullsandcows.Login</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>Register</display-name>
-		<servlet-name>Register</servlet-name>
-		<servlet-class>com.bullsandcows.Register</servlet-class>
-	</servlet>
 	<servlet>
 		<description>
 		</description>
@@ -35,20 +14,19 @@
 		<servlet-name>Game</servlet-name>
 		<servlet-class>com.bullsandcows.Game</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/Login</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>LoginDAO</servlet-name>
-		<url-pattern>/LoginDAO</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Register</servlet-name>
-		<url-pattern>/Register</url-pattern>
-	</servlet-mapping>
+	<servlet>
+		<description>
+		</description>
+		<display-name>RegServlet</display-name>
+		<servlet-name>RegServlet</servlet-name>
+		<servlet-class>com.bullsandcows.RegServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Game</servlet-name>
 		<url-pattern>/Game</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegServlet</servlet-name>
+		<url-pattern>/RegServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
