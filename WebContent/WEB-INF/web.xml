@@ -10,8 +10,8 @@
 	<servlet>
 		<description>
 		</description>
-		<display-name>Game</display-name>
-		<servlet-name>Game</servlet-name>
+		<display-name>GameServlet</display-name>
+		<servlet-name>GameServlet</servlet-name>
 		<servlet-class>com.bullsandcows.Game</servlet-class>
 	</servlet>
 	<servlet>
@@ -21,12 +21,23 @@
 		<servlet-name>RegServlet</servlet-name>
 		<servlet-class>com.bullsandcows.RegServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Game</display-name>
 		<servlet-name>Game</servlet-name>
-		<url-pattern>/Game</url-pattern>
+		<servlet-class>com.bullsandcows.Game</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GameServlet</servlet-name>
+		<url-pattern>/GameServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>RegServlet</servlet-name>
 		<url-pattern>/RegServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Game</servlet-name>
+		<url-pattern>/Game</url-pattern>
 	</servlet-mapping>
 </web-app>

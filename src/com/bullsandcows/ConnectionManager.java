@@ -9,8 +9,8 @@ public class ConnectionManager {
 	private static ConnectionManager instance = null;
 
 	private final String USERNAME = "SA";
-	private final String PASSWORD = " ";
-	private final String CONN_STRING = "jdbc:hsqldb:mem:testdb";
+	private final String PASSWORD = "root";
+	private final String CONN_STRING = "jdbc:hsqldb:file:${workspace_loc}";
 
 	private Connection conn = null;
 
