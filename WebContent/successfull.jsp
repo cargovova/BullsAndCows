@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Successful</title>
+<title>Successfull</title>
 </head>
 <body>
-<center><h1>Successful Transaction</h1></center><br><br>
-<center><p><a href="game.jsp">PLAY</a></p></center>
+<center><h1>Успешно!</h1></center>
+<center><p><a href="index.jsp">ИГРАТЬ</a></p></center>
 </body>
 </html>

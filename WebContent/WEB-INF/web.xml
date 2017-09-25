@@ -4,14 +4,14 @@
 		<welcome-file-list>
 		<welcome-file>home.jsp</welcome-file>
 		<welcome-file>register.jsp</welcome-file>
-		<welcome-file>successful.jsp</welcome-file>
+		<welcome-file>successfull.jsp</welcome-file>
 		<welcome-file>game.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
 		<description>
 		</description>
-		<display-name>GameServlet</display-name>
-		<servlet-name>GameServlet</servlet-name>
+		<display-name>Game</display-name>
+		<servlet-name>Game</servlet-name>
 		<servlet-class>com.bullsandcows.Game</servlet-class>
 	</servlet>
 	<servlet>
@@ -24,20 +24,20 @@
 	<servlet>
 		<description>
 		</description>
-		<display-name>Game</display-name>
-		<servlet-name>Game</servlet-name>
-		<servlet-class>com.bullsandcows.Game</servlet-class>
+		<display-name>GameServlet</display-name>
+		<servlet-name>GameServlet</servlet-name>
+		<servlet-class>controllers.GameServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>GameServlet</servlet-name>
-		<url-pattern>/GameServlet</url-pattern>
+		<servlet-name>Game</servlet-name>
+		<url-pattern>/Game</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>RegServlet</servlet-name>
 		<url-pattern>/RegServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Game</servlet-name>
-		<url-pattern>/Game</url-pattern>
+		<servlet-name>GameServlet</servlet-name>
+		<url-pattern>/guess</url-pattern>
 	</servlet-mapping>
 </web-app>

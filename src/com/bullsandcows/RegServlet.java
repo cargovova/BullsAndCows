@@ -39,6 +39,7 @@ public class RegServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text.html; charset=UTF-8");
 		RequestDispatcher rd;
 		PrintWriter out = response.getWriter();
 		String hdnParam = request.getParameter("pagename");
