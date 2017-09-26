@@ -12,7 +12,7 @@
 	<center><input type="text" name="LogUser" placeholder="Username"></input><br><br></center>
 	<center><input type="password" name = "LogPass" placeholder="Password"></input><br></center><br>
 	        <input type="hidden" name="pagename" value="login"/>
-	<center><input id="in" type= "submit" name="submit" value="LOGIN"></input><br><br></center>
+	<center><input id="in" type= "submit" name="submit" value="Войти"></input><br><br></center>
 	</form>
     <center><p>НЕТ АККАУНТА? <a href="register.jsp">СОЗДАТЬ</a></p></center>
 </body>

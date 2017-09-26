@@ -1,15 +1,23 @@
 package model;
 
-import java.util.Random;
 
 public class GameNumber {
-
+	
+	private String val;
 	private int value;
 
 	public GameNumber() {
 		value = 0;
 	}
-
+	
+	public GameNumber(String val) {
+			this.val = val;
+	}
+	
+	public String getVal() {
+		return val;
+	}
+	
 	public GameNumber(int value) {
 		if (value < 0) {
 			this.value = 0;
@@ -30,10 +38,6 @@ public class GameNumber {
 		}
 	}
 
-	public void setRandom(int minimum, int maximum) {
-		Random random = new Random();
-		this.value = random.nextInt(maximum - minimum) + minimum;
-	}
 
 	public void increment() {
 		this.value++;

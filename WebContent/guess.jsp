@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="model.GameNumber" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="model.GameNumber"%>
 
 <%
-GameNumber minimum = new GameNumber(1000);
-GameNumber maximum = new GameNumber(10000);
-GameNumber guesses = new GameNumber(1);
+	GameNumber minimum = new GameNumber(Integer.parseInt(request.getParameter("minimum")));
+	GameNumber maximum = new GameNumber(Integer.parseInt(request.getParameter("maximum")));
+	GameNumber guess = new GameNumber(request.getParameter("guess"));
+	GameNumber target = new GameNumber(request.getParameter("target"));
+	GameNumber guesses = (GameNumber) request.getAttribute("guesses");
+	String msg = (String) request.getAttribute("msg");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,25 +18,21 @@ GameNumber guesses = new GameNumber(1);
 <title>Insert title here</title>
 </head>
 <body>
-<table>
-<td>
-<p>
-				Введите число больше
-				<%=minimum.getValue()%>
-				и меньше
-				<%=maximum.getValue()%>
-				без повторяющихся чисел.
-</p>
+	<table>
+		<td>
 			<form name="guessForm" action="guess" method="post">
-<label>
-количество попыток: <%= guesses.getValue() %>
-</label>
-<input type="text" name="guess" placeholder="Введите число" /><br><br>
-<input type="submit" name="guessButton" value="Сделать ход"/>
-<input type="hidden" name="guesses" value="<%= guesses.getValue()%>" />
-<input type="hidden" name="minimum" value="<%= minimum.getValue()%>" />
-<input type="hidden" name="maximum" value="<%= maximum.getValue()%>" />
-</form>
+				<label> Количество попыток: <%=guesses.getValue()%>
+				</label> <input type="text" name="guess" placeholder="Введите число" /><br>
+				<br> <input type="submit" name="guessButton" value="Сделать ход" /> 
+				<input type="hidden" name="minimum"	value="<%=minimum.getValue()%>" /> 
+				<input type="hidden" name="maximum" value="<%=maximum.getValue()%>" /> 
+				<input type="hidden" name="guesses" value="<%=guesses.getValue()%>" />
+				<input type="hidden" name="target" value="<%=target.getVal()%>" />
+			</form>
+			<p>
+				<%=guess.getVal()%>
+				<%=msg%>
+			</p>
 		</td>
 		<td>
 			<h1>Быки и коровы</h1>

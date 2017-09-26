@@ -1,9 +1,9 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +31,7 @@ public class GameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// this.doPost(request, response);
 	}
 
 	/**
@@ -43,89 +42,104 @@ public class GameServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text.html; charset=UTF-8");
 
-		
-		GameNumber guess = new GameNumber(Integer.parseInt(request.getParameter("guess")));
+		GameNumber guess = new GameNumber(request.getParameter("guess"));
 		GameNumber minimum = new GameNumber(Integer.parseInt(request.getParameter("minimum")));
 		GameNumber maximum = new GameNumber(Integer.parseInt(request.getParameter("maximum")));
-		GameNumber target = new GameNumber(Integer.parseInt(request.getParameter("target")));
 		GameNumber guesses = new GameNumber(Integer.parseInt(request.getParameter("guesses")));
+		
+		String msg = null;
+		String url;
+		int min = minimum.getValue();
+		int max = maximum.getValue();
+		
+		String guessedNumber = guess.getVal();
+		Scanner sc = new Scanner(System.in);
+		produceRandomTarget();
+		url = "guess.jsp";
+		int bulls = 0;
+		int cows = 0;
+		if(min>max) {
 
-		String msg = "";
-		hasDupes(target.getValue());
-		String guessStr = guess.getValue() + "";
-		String targetStr = target.getValue() + "";
-		Scanner input = new Scanner(System.in);
-		msg = "Введите 4-значное число без повторяющихся чисел: ";
-			if (guess.getValue() < minimum.getValue() || guess.getValue() > maximum.getValue()) {
-				msg = "Некорректное число";
-			} else {
-				int bulls = 0;
-				int cows = 0;
-				for (int i = 0; i < 4; i++) {
-					if (guessStr.charAt(i) == targetStr.charAt(i)) {
-						bulls++;
-					} else if (targetStr.contains(guessStr.charAt(i) + "")) {
-						cows++;
-					}
-				}
-				if (bulls == 4) {
-					msg = "Вы победили после " + guesses.getValue() + " попыток!";
-				} else {
-					guesses.increment();
-					msg = bulls + " Быков и  " + cows + " Коров.";
-				}
+		} else {
+			bulls = computeBulls(guessedNumber, chosenNum);
+			cows = computeCows(guessedNumber, chosenNum);
+
+			if (hasRepeatingDigits(guessedNumber)) {
+				msg = "Некорректно. Символы повторяются.";
+			} else if (guessedNumber.length() != 4) {
+				msg = "Ваше число должно быть 4-значным";
+			} else if (containsNonDigits(guessedNumber)) {
+				msg = "В запросе содержатся буквы";
+			} else if (bulls == 4) {
+				msg = "Б = " + bulls + "К = " + cows;
+				msg = "Вы победили за " + guesses + " ходов.";
+				url = "correct.jsp";
+			} else if (!hasRepeatingDigits(guessedNumber) && !containsNonDigits(guessedNumber)) {
+				msg = "Б = " + bulls + "К = " + cows;
+				guesses.increment();
 			}
-		input.close();
+		}
+		sc.close();
+		
+		request.setAttribute("guess", guessedNumber);
+		request.setAttribute("msg", msg);
+		request.setAttribute("guesses", guesses);
+		request.setAttribute("target", chosenNum);
 
-
-					PrintWriter out = response.getWriter();
-
-					out.println(
-							"<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>");
-					out.println("<html>");
-					out.println("<head>");
-					out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-					out.println("<title>Insert title here</title>");
-					out.println("</head>");
-					out.println("<body>");
-					out.println("<p>");
-					out.println(msg);
-					out.println("<p>");
-
-					if (guess.getValue() == target.getValue()) {
-						out.println("<a href='index.jsp'> Play Again! </a>");
-					} else {
-						out.println("<p>");
-						out.println("Пожалуйста, введите число больше " + minimum.getValue() + " и меньше" + maximum.getValue()
-								+ ".");
-						out.println("</p>");
-						out.println("<form name='guessForm' action='guess' method='post'>");
-						out.println("<label>");
-						out.println("Попытка  " + guesses.getValue() + " : ");
-						out.println("</label>");
-						out.println("<input type='text' name='guess' placeholder='Введите число' />");
-						out.println("<br><input type='submit' name='guessButton' value='Сделать ход' />");
-
-						out.println("<input type='hidden' name='target' value='" + target.getValue() + "' />");
-						out.println("<input type='hidden' name='guesses' value='" + guesses.getValue() + "' />");
-						out.println("<input type='hidden' name='minimum' value='" + minimum.getValue() + "' />");
-						out.println("<input type='hidden' name='maximum' value='" + maximum.getValue() + "' />");
-						out.println("</form>");
-					}
-					out.println("</body>");
-					out.println("</html>");
-				
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
+	}
+		
+	private static String chosenNum = "";
+	private static String produceRandomTarget() {
+		int randomNumber = 1000 + ((int) (Math.random() * 10000) % 9000);
+		chosenNum = Integer.toString(randomNumber);
+		while (hasRepeatingDigits(chosenNum)) {
+			produceRandomTarget();
+		}
+		return chosenNum;
 	}
 
-	public static boolean hasDupes(int num) {
-		boolean[] digs = new boolean[10];
-		while (num > 0) {
-			if (digs[num % 10])
-				return true;
-			digs[num % 10] = true;
-			num /= 10;
+	private static boolean hasRepeatingDigits(String num) {
+		for (int i = 0; i < num.length() - 1; i++) {
+			for (int j = i + 1; j < num.length(); j++) {
+				if (num.charAt(i) == num.charAt(j)) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}
 
+	private static boolean containsNonDigits(String num) {
+		if (!num.matches("^[0-9]+$")) {
+			return true;
+		}
+		return false;
+	}
+
+	private static int computeBulls(String num1, String num2) {
+		int bullCounter = 0;
+
+		for (int i = 0; i < num1.length(); i++) {
+			if (num1.charAt(i) == num2.charAt(i)) {
+				bullCounter++;
+			}
+		}
+		return bullCounter;
+	}
+
+	private static int computeCows(String num1, String num2) {
+		int cowsCounter = 0;
+		for (int i = 0; i < num1.length(); i++) {
+			for (int j = 0; j < num2.length(); j++) {
+				if (i != j) {
+					if (num1.charAt(i) == num2.charAt(j)) {
+						cowsCounter++;
+					}
+				}
+			}
+		}
+		return cowsCounter;
+	}
 }

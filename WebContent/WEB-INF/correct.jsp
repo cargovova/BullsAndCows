@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>successfull</title>
+<title>Insert title here</title>
 </head>
 <body>
-<center><h1>Успешно!</h1></center>
-<center><p><a href="index.jsp">ИГРАТЬ</a></p></center>
+Correct!
 </body>
 </html>

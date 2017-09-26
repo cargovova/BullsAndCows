@@ -59,10 +59,10 @@ public class RegServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				rd = request.getRequestDispatcher("successful.jsp");
+				rd = request.getRequestDispatcher("successfull.jsp");
 				rd.forward(request, response);
 			} else {
-				out.println("Password dooesn't match");
+				out.println("Пароли не совпадают");
 				rd = request.getRequestDispatcher("register.jsp");
 				rd.include(request, response);
 			}
@@ -78,10 +78,10 @@ public class RegServlet extends HttpServlet {
 				int checkUser = DBManager.checkUser(set);
 				System.out.println(checkUser);
 				if (checkUser == 1) {
-					rd = request.getRequestDispatcher("successful.jsp");
+					rd = request.getRequestDispatcher("successfull.jsp");
 					rd.forward(request, response);
 				} else {
-					out.print("Sorry, Password and Username Error");
+					out.print("Извините, такого пароля или логина не существует");
 					rd = request.getRequestDispatcher("home.jsp");
 					rd.include(request, response);
 				}
