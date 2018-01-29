@@ -43,24 +43,16 @@ public class GameServlet extends HttpServlet {
 		response.setContentType("text.html; charset=UTF-8");
 
 		GameNumber guess = new GameNumber(request.getParameter("guess"));
-		GameNumber minimum = new GameNumber(Integer.parseInt(request.getParameter("minimum")));
-		GameNumber maximum = new GameNumber(Integer.parseInt(request.getParameter("maximum")));
 		GameNumber guesses = new GameNumber(Integer.parseInt(request.getParameter("guesses")));
 		
 		String msg = null;
-		String url;
-		int min = minimum.getValue();
-		int max = maximum.getValue();
-		
+		String url;		
 		String guessedNumber = guess.getVal();
 		Scanner sc = new Scanner(System.in);
 		produceRandomTarget();
 		url = "guess.jsp";
 		int bulls = 0;
 		int cows = 0;
-		if(min>max) {
-
-		} else {
 			bulls = computeBulls(guessedNumber, chosenNum);
 			cows = computeCows(guessedNumber, chosenNum);
 
@@ -78,7 +70,6 @@ public class GameServlet extends HttpServlet {
 				msg = "Б = " + bulls + "К = " + cows;
 				guesses.increment();
 			}
-		}
 		sc.close();
 		
 		request.setAttribute("guess", guessedNumber);

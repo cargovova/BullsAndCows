@@ -34,16 +34,6 @@ public class DBManager {
 			count = rs.getInt(1);
 		}
 		
-		Statement stmt = null;                   //verification in console for me
-		stmt = conn.createStatement();
-		ResultSet res = stmt.executeQuery( 
-                "SELECT fname, password FROM register");
-		 while(res.next() ){
-             System.out.println(res.getString("fname") +" | "+
-                     res.getString("password") );
-         }                                       //end verification in console for me
-		 
-
 		ConnectionManager.getInstance();
 		return count;
 

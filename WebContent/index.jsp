@@ -3,8 +3,6 @@
 <%@ page import="model.GameNumber" %>
 
 <%
-GameNumber minimum = new GameNumber(1000);
-GameNumber maximum = new GameNumber(10000);
 GameNumber guesses = new GameNumber(1);
 %>
 
@@ -19,9 +17,9 @@ GameNumber guesses = new GameNumber(1);
 <td>
 <p>
 				Введите число больше
-				<%=minimum.getValue()%>
+				1000
 				и меньше
-				<%=maximum.getValue()%>
+				10000
 				без повторяющихся чисел.
 </p>
 			<form name="guessForm" action="guess" method="post">
@@ -31,8 +29,6 @@ GameNumber guesses = new GameNumber(1);
 <input type="text" name="guess" placeholder="Введите число" /><br><br>
 <input type="submit" name="guessButton" value="Сделать ход"/>
 <input type="hidden" name="guesses" value="<%= guesses.getValue()%>" />
-<input type="hidden" name="minimum" value="<%= minimum.getValue()%>" />
-<input type="hidden" name="maximum" value="<%= maximum.getValue()%>" />
 </form>
 		</td>
 		<td>

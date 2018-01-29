@@ -3,8 +3,6 @@
 <%@ page import="model.GameNumber"%>
 
 <%
-	GameNumber minimum = new GameNumber(Integer.parseInt(request.getParameter("minimum")));
-	GameNumber maximum = new GameNumber(Integer.parseInt(request.getParameter("maximum")));
 	GameNumber guess = new GameNumber(request.getParameter("guess"));
 	GameNumber target = new GameNumber(request.getParameter("target"));
 	GameNumber guesses = (GameNumber) request.getAttribute("guesses");
@@ -24,8 +22,6 @@
 				<label> Количество попыток: <%=guesses.getValue()%>
 				</label> <input type="text" name="guess" placeholder="Введите число" /><br>
 				<br> <input type="submit" name="guessButton" value="Сделать ход" /> 
-				<input type="hidden" name="minimum"	value="<%=minimum.getValue()%>" /> 
-				<input type="hidden" name="maximum" value="<%=maximum.getValue()%>" /> 
 				<input type="hidden" name="guesses" value="<%=guesses.getValue()%>" />
 				<input type="hidden" name="target" value="<%=target.getVal()%>" />
 			</form>
